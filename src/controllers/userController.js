@@ -1,6 +1,20 @@
 import asyncHandler from "express-async-handler";
 import { validationResult } from "express-validator";
-import { getAllAdminsService, getAllUsersService, getUserByIdService, createUserService, updateUserService, deleteUserService, updateUserProfileService, getUserProfileService, changeUserStatusService } from "../services/userService.js";
+import { getAllAdminsService, getAllUsersService, getUserByIdService, createUserService, updateUserService, deleteUserService, updateUserProfileService, getUserProfileService, changeUserStatusService, getAllCustomersService, getCustomerByIdService } from "../services/userService.js";
+
+export const getCustomers = asyncHandler(async (req, res) => {
+    const customers = await getAllCustomersService();
+    res.status(200).json(customers);
+});
+
+export const getCustomerById = asyncHandler(async (req, res) => {
+    const user = await getCustomerByIdService(req.params.id, req.user);
+    res.status(200).json(user);
+});
+
+
+
+
 
 export const getAllAdmins = asyncHandler(async (req, res) => {
     const admins = await getAllAdminsService();

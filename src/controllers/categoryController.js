@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import { createCategoryService, updateCategoryService, deleteCategoryService, changeCategoryStatusService, getCategoryByIdService, getAllCategoriesService } from "../services/categoryService.js";
+import { createCategoryService, updateCategoryService, deleteCategoryService, changeCategoryStatusService, getCategoryByIdService, getAllCategoriesService, getActiveCategoriesService } from "../services/categoryService.js";
 import { body, validationResult } from "express-validator";
 
 export const createCategory = [
@@ -61,6 +61,15 @@ export const getCategoryById = asyncHandler(async (req, res) => {
 export const getAllCategories = asyncHandler(async (req, res) => {
     try {
         const categories = await getAllCategoriesService();
+        res.status(200).json(categories);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+export const getActiveCategories = asyncHandler(async (req, res) => {
+    try {
+        const categories = await getActiveCategoriesService();
         res.status(200).json(categories);
     } catch (error) {
         res.status(500).json({ message: error.message });

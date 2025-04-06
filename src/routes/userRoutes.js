@@ -1,8 +1,12 @@
 import { Router } from "express";
 import { protect, authorizeRoles } from "../middlewares/authMiddleware.js";
-import { getAllAdmins, getAllUsers, getUserById, updateUser, deleteUser, createUser, updateProfile, getProfile, changeUserStatus } from "../controllers/userController.js";
+import { getAllAdmins, getAllUsers, getUserById, updateUser, deleteUser, createUser, updateProfile, getProfile, changeUserStatus, getCustomers, getCustomerById } from "../controllers/userController.js";
 
 const router = Router();
+
+router.get("/customers", protect, authorizeRoles("super_admin", "admin", "user"), getCustomers);
+router.get("/customers/:id", protect, authorizeRoles("super_admin", "admin", "user"), getCustomerById);
+
 
 router.get("/profile", protect, getProfile);
 router.put("/profile", protect, updateProfile);
@@ -15,4 +19,3 @@ router.delete("/:id", protect, authorizeRoles("super_admin"), deleteUser);
 router.patch("/:id/status", protect, authorizeRoles("super_admin", "admin"), changeUserStatus);
 
 export default router;
- 

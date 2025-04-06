@@ -1,6 +1,22 @@
 import User from "../models/User.js";
 import { hash } from "bcryptjs";
 
+export const getAllCustomersService = async () => {
+    return await User.find({ role: "customer" });
+};
+
+export const getCustomerByIdService = async (id, requestingUser) => {
+    const userToFetch = await User.findById(id);
+    if (!userToFetch) throw { status: 404, message: "User not found" };
+    return userToFetch;
+};
+
+
+
+
+
+
+
 export const getAllAdminsService = async () => {
     return await User.find({ role: "admin" }).select("-password");
 };

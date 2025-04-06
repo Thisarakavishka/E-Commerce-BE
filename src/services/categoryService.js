@@ -42,7 +42,6 @@ export const changeCategoryStatusService = async (id, userId) => {
     return await category.save();
 };
 
-
 export const getCategoryByIdService = async (id) => {
     const category = await Category.findById(id);
     if (!category) {
@@ -51,6 +50,6 @@ export const getCategoryByIdService = async (id) => {
     return category;
 };
 
-export const getAllCategoriesService = async () => {
-    return await Category.find();
-};
+export const getAllCategoriesService = async () => await Category.find();
+
+export const getActiveCategoriesService = async () => await Category.find({ isActive: true });
