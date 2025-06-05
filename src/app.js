@@ -8,6 +8,7 @@ import userRoutes from "./routes/userRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+import notificationRoutes from "./routes/notificationRoute.js";
 import errorHandler from "./middlewares/errorMiddleware.js";
 
 dotenv.config();
@@ -38,6 +39,7 @@ app.use("/uploads", express.static("uploads", {
 
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/notifications", notificationRoutes);
 app.use(errorHandler);
 
 export default app;
